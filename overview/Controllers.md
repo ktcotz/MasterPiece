@@ -9,3 +9,9 @@ Określają one różne zachowania które chcemy w danym roucie.
 **Params** - pozwala określić parametry dla danego routa.
 **Query** - pozwala określić route query dla danego routa.
 **Body** - pozwala określić body dla danego routa.
+
+Przykłady:
+
+**Params** - localhost:3000/users/35
+**Query** - localhost:3000/users/35?limit=10&age=50
+**Body** - JSON data.

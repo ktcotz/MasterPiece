@@ -3,11 +3,24 @@ import { CreateUserDTO } from './dto/users.dto';
 
 @Injectable()
 export class UsersService {
-  users = [];
+  users = [
+    {
+      name: 'Kamil',
+      age: 23,
+    },
+  ];
 
   getUsers() {
     return {
       users: this.users,
+    };
+  }
+
+  getUser(id: number) {
+    const user = this.users[id];
+
+    return {
+      user,
     };
   }
 
