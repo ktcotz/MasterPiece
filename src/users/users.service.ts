@@ -5,8 +5,10 @@ import { CreateUserDTO } from './dto/users.dto';
 export class UsersService {
   users = [
     {
-      name: 'Kamil',
-      age: 23,
+      firstName: 'Kamil',
+      lastName: 'Jan',
+      email: 'kam.nas21@wp.pl',
+      password: 'adam123',
     },
   ];
 

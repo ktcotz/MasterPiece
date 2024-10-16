@@ -1,6 +1,16 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  ValidationPipe,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDTO } from './dto/users.dto';
+import { IUsersQuery } from './dto/users.interface';
 
 @Controller('users')
 export class UsersController {
@@ -12,7 +22,10 @@ export class UsersController {
   }
 
   @Get(':id')
-  getUser(@Param('id') id: number, @Query() query: any) {
+  getUser(
+    @Param('id', ParseIntPipe) id: number,
+    @Query() { limit = 10, page = 1 }: IUsersQuery,
+  ) {
     return this.usersService.getUser(id);
   }
 
