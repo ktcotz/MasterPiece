@@ -18,7 +18,7 @@ export class UsersService {
     };
   }
 
-  getUser(id: number) {
+  getUser(id: number, limit: number, page: number) {
     const user = this.users[id];
 
     return {

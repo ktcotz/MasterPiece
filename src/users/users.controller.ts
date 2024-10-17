@@ -4,13 +4,12 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Query,
-  ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDTO } from './dto/users.dto';
-import { IUsersQuery } from './dto/users.interface';
+import { CreateUserDTO, PatchUserDTO, UserQueryDTO } from './dto/users.dto';
 
 @Controller('users')
 export class UsersController {
@@ -24,13 +23,19 @@ export class UsersController {
   @Get(':id')
   getUser(
     @Param('id', ParseIntPipe) id: number,
-    @Query() { limit = 10, page = 1 }: IUsersQuery,
+    @Query() { limit, page }: UserQueryDTO,
   ) {
-    return this.usersService.getUser(id);
+
+    return this.usersService.getUser(id,limit,page);
   }
 
   @Post()
   createUser(@Body() createUserDTO: CreateUserDTO) {
     return this.usersService.createUser(createUserDTO);
+  }
+
+  @Patch()
+  patchUser(@Body() patchUserDTO: PatchUserDTO) {
+    return patchUserDTO;
   }
 }
