@@ -11,7 +11,10 @@ import {
   IsUrl,
   Matches,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
+import { CreatePostMetaOptionsDTO } from './create-post-metadata.dto';
+import { Type } from 'class-transformer';
 
 export enum PostType {
   POST = 'post',
@@ -40,6 +43,7 @@ export class CreatePostDTO {
   @IsEnum(PostType)
   @IsNotEmpty()
   @ApiProperty({
+    enum: PostType,
     description: 'Type of post',
     example: PostType.POST,
   })
@@ -60,6 +64,7 @@ export class CreatePostDTO {
   @IsNotEmpty()
   @IsEnum(PostStatus)
   @ApiProperty({
+    enum: PostStatus,
     description: 'Status of post',
     example: PostStatus.PUBLISHED,
   })
@@ -106,5 +111,8 @@ export class CreatePostDTO {
   })
   tags?: string[];
 
-  metaOptions: { key: string; value: boolean }[];
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreatePostMetaOptionsDTO)
+  metaOptions: CreatePostMetaOptionsDTO[];
 }
